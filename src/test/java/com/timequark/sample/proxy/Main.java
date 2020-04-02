@@ -14,7 +14,9 @@ public class Main {
 
         //创建一个代理对象stuProxy来代理zhangsan，代理对象的每个执行方法都会替换执行Invocation中的invoke方法
         Person stuProxy = (Person) Proxy.newProxyInstance(Person.class.getClassLoader(), new Class<?>[]{Person.class}, stuHandler);
-
+        Class<?>[] itfs = stuProxy.getClass().getInterfaces();
+        String clz = stuProxy.getClass().getName();
+        
         //代理执行上交班费的方法
         stuProxy.giveMoney();
     }
