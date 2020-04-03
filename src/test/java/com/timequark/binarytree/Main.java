@@ -1,5 +1,8 @@
 package com.timequark.binarytree;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
 
 
@@ -7,15 +10,21 @@ public class Main {
 
     public static void main(String[] args) {
         /**
-         *                         1
-         *                    /       \
-         *                    2               3
-         *                  /  \              /      \
-         *                 4      5           6             7
-         *                / \    /  \        /   \        /   \
-         *               8   9   10  11     12   13    14    15
-         *              /\  /  \  /\    / \   /  \  /  \  /  \  /  \
-         *           20 21 22 23  24 25 26 27 28 29 30 31 32 33 34 35
+         *                                 1
+         *                           /            \
+         *                         /                 \
+         *                      /                        \
+         *                   /                             \
+         *                  2                                3
+         *                /  \                              /  \
+         *              /      \                          /      \
+         *           /          \                       /          \
+         *         4              5                    6            7
+         *       /  \           /   \                /  \          / \
+         *     /     \        /      \             /      \      /     \
+         *    8       9      10      11           12      13    14     15
+         *  /  \    /  \   /  \     /  \          / \    /  \   / \    / \
+         * 20  21  22 23  24  25   26  27        28 29   30 31 32 33  34 35
          *
          * */
 
@@ -57,16 +66,22 @@ public class Main {
         Node.bind(root.right.left, node12, node13);
         Node.bind(root.right.right, node14, node15);
 
-        Node ancestor = findAncestor(root.left.right.left.left, root.left.right.right.right);
-        ancestor = findAncestor(root.left.left.left.left, root.left.right.right.right);
+        Node a = root.left.right.left.left;
+        Node b = root.left.right.right.right;
+        Node ancestor = findAncestor(a, b);
+        System.out.println(String.format("{%d} and {%d} : ancestor is {%d}", a.v, b.v, ancestor.v));
 
+        a = root.left.left.left.left;
+        b = root.left.right.right.right;
+        ancestor = findAncestor(a, b);
+        System.out.println(String.format("{%d} and {%d} : ancestor is {%d}", a.v, b.v, ancestor.v));
+
+        //HashSet hs = new HashSet<String>();
 
         System.out.println();
     }
 
     private static Node findAncestor(Node a, Node b) {
-        Node ancestor = null;
-
         if (a == null || b == null) return null;
 
         if (a == b) return a;
